@@ -194,7 +194,7 @@ def hero():
              '<g stroke="#3fbd62" stroke-width="1.2" opacity=".4">%s</g></g>' % (nrows, nrows2))
 
     # tractor (scaled), driving left -> right
-    b.append('<g transform="translate(0 392) scale(.82)"><g class="drive">%s</g></g>' % ico_tractor())
+    b.append('<g transform="translate(0 395) scale(.96)"><g class="drive">%s</g></g>' % ico_tractor())
 
     # fireflies
     ff = ""
