@@ -321,16 +321,15 @@ def repo_table(repos, skip=()):
         if r["name"] in skip or r.get("archived"):
             continue
         note, stack = REPO_NOTES.get(r["name"], (None, None))
-        desc = note or (r.get("description") or "—")
-        if r.get("fork") and not note:
-            desc += " *(fork)*"
-        desc = desc.replace("|", "/")
+        desc = (note or (r.get("description") or "—")).replace("|", "/").replace("\n", " ")
         if len(desc) > 110:
             desc = desc[:107].rstrip() + "..."
+        if r.get("fork") and not note:
+            desc += " *(fork)*"
         stack = stack or r.get("language") or "—"
         live = "[open](%s)" % r["homepage"] if r.get("homepage") else "—"
-        upd = (r.get("pushed_at") or "")[:10] or "—"
-        rows.append("| [**%s**](%s) | %s | %s | %s | `%s` |" % (r["name"], r["html_url"], desc, stack, live, upd))
+        upd = ((r.get("pushed_at") or "")[:10] or "—").replace("-", "‑")  # non-breaking hyphens keep dates on one line
+        rows.append("| [**%s**](%s) | %s | %s | %s | %s |" % (r["name"], r["html_url"], desc, stack, live, upd))
     return "\n".join(rows)
 
 
@@ -358,7 +357,7 @@ def main():
     ap.add_argument("--fixture", help="render from a previously dumped JSON file (no network)")
     args = ap.parse_args()
 
-    now = dt.datetime.utcnow()
+    now = dt.datetime.now(dt.timezone.utc).replace(tzinfo=None)  # naive UTC, like GitHub's calendar days
     today = now.date()
     if args.fixture:
         data = json.load(open(args.fixture, encoding="utf-8"))

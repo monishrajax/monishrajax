@@ -299,14 +299,14 @@ def project(p):
     # title + tagline
     tsize = fit_size("display", p["name"], 44, 590)
     b.append(text("display", p["name"], 206, 72, tsize, P["cream"]))
-    b.append(text("mono", p["tagline"], 207, 98, 14, P["mist"], tracking=1.4))
+    b.append(text("mono", p["tagline"], 207, 100, 16, P["mist"], tracking=1.2))
     # chips
     cx = 206
     for slug, label in p["stack"]:
-        cw = 8 + 16 + 7 + text_width("mono", label, 12, 1.2) + 12
-        b.append('<rect x="%s" y="112" width="%s" height="28" rx="9" fill="#0f3320" stroke="#1f6f3a" stroke-width="1.4"/>' % (f(cx), f(cw)))
-        b.append(icon_path(slug, cx + 9, 118, 16, P["cream"]))
-        b.append(text("mono", label, cx + 32, 130.5, 12, P["cream"], tracking=1.2))
+        cw = 10 + 18 + 7 + text_width("mono", label, 13.5, 1.2) + 13
+        b.append('<rect x="%s" y="110" width="%s" height="32" rx="10" fill="#0f3320" stroke="#1f6f3a" stroke-width="1.4"/>' % (f(cx), f(cw)))
+        b.append(icon_path(slug, cx + 10, 117, 18, P["cream"]))
+        b.append(text("mono", label, cx + 35, 130.6, 13.5, P["cream"], tracking=1.2))
         cx += cw + 8
     css = ""
     return svg_doc(W, H, "".join(b), defs, css, "%s - %s" % (p["name"], p["tagline"]))
