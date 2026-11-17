@@ -7,6 +7,7 @@ Everything that draws the farm. Pure Python 3 standard library, no installs need
 | `build_assets.py` | Builds the **static** SVGs in `../assets` (hero, section banners, tags, project cards, tech carousel, footer, contact badges). Edit the `CONFIG` block at the top (handle, tagline, projects, tech lists), then run `python3 scripts/build_assets.py` and commit the result. |
 | `update_yield.py` | Builds the **live** `assets/yield.svg` (stat plates + a grass-in-boxes contribution graph) from your GitHub contribution calendar and refreshes the repo table in `README.md` (between the `REPOS:START/END` markers). Run by `.github/workflows/farm-yield.yml` every 6 hours; you can also run it by hand: `python3 scripts/update_yield.py`. |
 | `farmlib.py` | Shared drawing helpers: palette, text-to-path, wheat, grass, tractor, barn and other icons. |
+| `farm_animals.py` | The animated farm animals (cow, sheep, pig, dog, hen, rooster, chick, duck). `animal("cow", x, y, scale, mirrored)` returns one standing at that spot; where they appear is set in `build_assets.py` (hero, banners, project cards, footer) and `update_yield.py` (the strip under the graph). |
 | `farm_glyphs.json` | Vector outlines of the two fonts below, so text renders identically everywhere (GitHub loads SVGs through `<img>`, which cannot use web fonts). |
 | `farm_icons.json` | Tech logo outlines from Simple Icons. |
 

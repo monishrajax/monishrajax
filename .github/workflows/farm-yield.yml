@@ -13,6 +13,7 @@ on:
       - "scripts/update_yield.py"
       - "scripts/farmlib.py"
       - "scripts/farm_*.json"
+      - "scripts/farm_*.py"
       - ".github/workflows/farm-yield.yml"
 
 permissions:

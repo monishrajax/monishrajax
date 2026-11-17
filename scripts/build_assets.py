@@ -16,8 +16,9 @@ from farmlib import (P, f, svg_doc, text, text_width, fit_size, cap_height, catm
                      wheat, tuft, sprout, icon_path, rng, ico_barn, ico_sunflower, ico_sprout_big,
                      ico_wheat_bundle, ico_idcard, ico_pitchfork, ico_rosette, ico_scroll, ico_mailbox,
                      ico_pots, ico_tractor, windmill, ICONS)
+from farm_animals import ANIMAL_CSS, animal  # noqa: E402
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "assets")
 
 # =============================================================== CONFIG ======
@@ -29,15 +30,24 @@ def ico_tractor_small():
     return '<g transform="scale(.4) translate(-83 52)">%s</g>' % ico_tractor()
 
 
-SECTIONS = [  # number, title, subtitle, accent, icon fn, file
-    ("01", "FARMER'S DOSSIER", "WHO RUNS THIS FARM", "lime", ico_idcard, "sec-01-dossier"),
-    ("02", "EXPERIENCE & LEADERSHIP", "FIELD WORK // TRACTOR LOG", "gold", ico_tractor_small, "sec-02-experience"),
-    ("03", "PROJECTS", "THE FIELDS // WHAT'S GROWING", "lime", ico_pots, "sec-03-projects"),
-    ("04", "TECH ARSENAL", "THE TOOLSHED // TOOLS OF THE TRADE", "orange", ico_pitchfork, "sec-04-arsenal"),
-    ("05", "ACHIEVEMENTS", "COUNTY FAIR RIBBONS", "gold", ico_rosette, "sec-05-achievements"),
-    ("06", "CERTIFICATIONS", "SEED CERTIFICATES", "sky", ico_scroll, "sec-06-certifications"),
-    ("07", "SYSTEM METRICS", "CROP YIELD // LIVE FROM THE FIELD", "lime", ico_wheat_bundle, "sec-07-metrics"),
-    ("08", "ESTABLISH CONNECTION", "VISIT THE FARM // SEND A MESSAGE", "gold", ico_mailbox, "sec-08-connect"),
+# number, title, subtitle, accent, icon fn, file, animals perched on top of the sign: (kind, x, scale, mirrored)
+SECTIONS = [
+    ("01", "FARMER'S DOSSIER", "WHO RUNS THIS FARM", "lime", ico_idcard, "sec-01-dossier",
+     [("rooster", 660, .5, False)]),
+    ("02", "EXPERIENCE & LEADERSHIP", "FIELD WORK // TRACTOR LOG", "gold", ico_tractor_small, "sec-02-experience",
+     [("cow", 640, .46, False)]),
+    ("03", "PROJECTS", "THE FIELDS // WHAT'S GROWING", "lime", ico_pots, "sec-03-projects",
+     [("hen", 600, .62, False), ("chick", 640, .9, True)]),
+    ("04", "TECH ARSENAL", "THE TOOLSHED // TOOLS OF THE TRADE", "orange", ico_pitchfork, "sec-04-arsenal",
+     [("sheep", 680, .55, True)]),
+    ("05", "ACHIEVEMENTS", "COUNTY FAIR RIBBONS", "gold", ico_rosette, "sec-05-achievements",
+     [("duck", 700, .7, False)]),
+    ("06", "CERTIFICATIONS", "SEED CERTIFICATES", "sky", ico_scroll, "sec-06-certifications",
+     [("hen-brown", 640, .62, True), ("chick", 604, .9, False)]),
+    ("07", "SYSTEM METRICS", "CROP YIELD // LIVE FROM THE FIELD", "lime", ico_wheat_bundle, "sec-07-metrics",
+     [("pig", 660, .52, False)]),
+    ("08", "ESTABLISH CONNECTION", "VISIT THE FARM // SEND A MESSAGE", "gold", ico_mailbox, "sec-08-connect",
+     [("dog", 680, .6, False)]),
 ]
 
 ACCENT = {"lime": P["g4"], "gold": P["gold"], "orange": P["orange"], "sky": P["sky"], "red": "#ff7a59"}
@@ -71,6 +81,16 @@ PROJECTS = [
          tagline="COMMIT > BUILD > CONTAINER > CLUSTER", badge="SOURCE · 2026",
          stack=[("githubactions", "ACTIONS"), ("docker", "DOCKER"), ("kubernetes", "KUBERNETES"), ("nodedotjs", "NODE.JS")]),
 ]
+
+# a small animal on each project's soil tile: file -> (kind, scale)
+PROJECT_PETS = {
+    "project-01-normalize": ("chick", .95),
+    "project-02-floor": ("sheep", .55),
+    "project-03-visaguard": ("cow", .42),
+    "project-04-resume": ("pig", .5),
+    "project-05-idscanner": ("hen", .62),
+    "project-06-cicd": ("duck", .7),
+}
 
 TECH_ROW_1 = [("javascript", "JAVASCRIPT"), ("typescript", "TYPESCRIPT"), ("python", "PYTHON"), ("html5", "HTML5"),
               ("css3", "CSS3"), ("react", "REACT"), ("nextdotjs", "NEXT.JS"), ("tailwindcss", "TAILWIND"),
@@ -123,7 +143,7 @@ def hero():
         "@keyframes swing{0%,100%{transform:rotate(-1.1deg)}50%{transform:rotate(1.1deg)}}"
         ".bird{animation:bird 44s linear infinite}"
         "@keyframes bird{from{transform:translateX(-90px)}to{transform:translateX(1120px)}}"
-    )
+    ) + ANIMAL_CSS
     b = ['<rect width="%d" height="%d" fill="url(#sky)"/>' % (W, H)]
 
     # stars
@@ -184,6 +204,11 @@ def hero():
     b.append('<g clip-path="url(#cm)"><g stroke="#0a3d1c" stroke-width="1.8" opacity=".9">%s</g>'
              '<g stroke="#2a8f48" stroke-width="1" opacity=".32">%s</g></g>' % (rows, rows2))
 
+    # pasture on the far hill: sheep and cows grazing
+    for kind, x, s, flip, d in [("sheep", 236, .46, False, .4), ("sheep", 268, .40, True, 1.9), ("sheep", 306, .44, False, 3.1),
+                                ("cow", 452, .50, False, .8), ("cow", 510, .44, True, 2.6), ("cow", 742, .46, True, 1.2)]:
+        b.append(animal(kind, x, y_at(mid, x) + 9, s, flip, d))
+
     # near field with crop rows
     near = catmull([(0, 356), (200, 346), (420, 354), (620, 344), (820, 352), (1000, 342)], 10)
     defs.append('<clipPath id="cn"><path d="%s"/></clipPath>' % hill_path(near, W, H))
@@ -192,6 +217,11 @@ def hero():
     nrows2 = "".join('<path d="M520 292L%d 440"/>' % (xb + 39) for xb in range(-1400, 2400, 78))
     b.append('<g clip-path="url(#cn)"><g stroke="#0b4a20" stroke-width="3" opacity=".85">%s</g>'
              '<g stroke="#3fbd62" stroke-width="1.2" opacity=".4">%s</g></g>' % (nrows, nrows2))
+
+    # animals in the near field (the tractor drives past in front of them)
+    for kind, x, s, flip, d in [("sheep", 148, .68, False, .2), ("sheep", 196, .62, True, 2.2),
+                                ("cow", 376, .74, False, 1.4), ("pig", 612, .62, True, .9)]:
+        b.append(animal(kind, x, 386, s, flip, d))
 
     # tractor (scaled), driving left -> right
     b.append('<g transform="translate(0 395) scale(.96)"><g class="drive">%s</g></g>' % ico_tractor())
@@ -211,6 +241,11 @@ def hero():
         fence += '<path d="M%d 440V398L%d 391L%d 398V440Z" fill="url(#fence)"/>' % (px, px + 7, px + 14)
         fence += '<path d="M%d 440V398L%d 391" stroke="#d9a066" stroke-width="1" opacity=".5" fill="none"/>' % (px, px + 7)
     b.append(fence)
+    # barnyard in front of the fence, and a rooster crowing on a fence post
+    for kind, x, s, flip, d in [("dog", 62, .9, False, .3), ("hen", 236, .8, False, .1), ("hen-brown", 272, .74, True, 1.3),
+                                ("chick", 300, .8, False, .6), ("duck", 780, .82, True, .2), ("hen-black", 884, .76, False, 2.1)]:
+        b.append(animal(kind, x, 440, s, flip, d))
+    b.append(animal("rooster", 525, 392, .9, False, .5))
     for i in range(34):
         b.append(tuft(r.uniform(-6, 1004), 442, s=r.uniform(.8, 1.5), delay=r.uniform(0, 4), dur=r.uniform(3.4, 5.4)))
 
@@ -238,12 +273,12 @@ def hero():
 
 
 # ============================================================ SECTION BANNER =
-def banner(num, title, sub, accent_key, icon_fn):
-    W, H = 1000, 124
+def banner(num, title, sub, accent_key, icon_fn, pets=()):
+    W, H, OFF = 1000, 146, 22  # OFF = headroom above the sign for the perched animals
     accent = ACCENT[accent_key]
     defs = ('<linearGradient id="bar" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0f3320"/><stop offset=".6" stop-color="#0a2414"/><stop offset="1" stop-color="#071a0e"/></linearGradient>'
             '<linearGradient id="acc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="%s"/><stop offset="1" stop-color="%s" stop-opacity="0"/></linearGradient>' % (accent, accent))
-    css = ".flag{animation:flag 3.2s ease-in-out infinite}@keyframes flag{0%,100%{transform:rotate(0)}50%{transform:rotate(-16deg)}}"
+    css = ".flag{animation:flag 3.2s ease-in-out infinite}@keyframes flag{0%,100%{transform:rotate(0)}50%{transform:rotate(-16deg)}}" + ANIMAL_CSS
     b = ['<rect x="2" y="16" width="996" height="86" rx="12" fill="url(#bar)" stroke="#1b5233" stroke-width="2"/>']
     dots = "".join('<circle cx="%d" cy="%d" r="1.7"/>' % (808 + cx * 17 + (8 if cy % 2 else 0), 32 + cy * 18) for cx in range(11) for cy in range(4))
     b.append('<g fill="#1b5233" opacity=".95">%s</g>' % dots)
@@ -263,7 +298,10 @@ def banner(num, title, sub, accent_key, icon_fn):
     b.append(wheat(846, 100, h=54, lean=5, delay=.3))
     b.append(wheat(986, 100, h=48, lean=-4, delay=1.4))
     b.append('<g transform="translate(920 58) scale(1.05)">%s</g>' % icon_fn())
-    return svg_doc(W, H, "".join(b), defs, css, "%s %s" % (num, title))
+    body = '<g transform="translate(0 %d)">%s</g>' % (OFF, "".join(b))
+    for i, (kind, x, s, flip) in enumerate(pets):  # animals perched on the top edge of the sign
+        body += animal(kind, x, OFF + 17, s, flip, d=i * 1.1 + .3)
+    return svg_doc(W, H, body, defs, css, "%s %s" % (num, title))
 
 
 # ================================================================== TAG ======
@@ -308,7 +346,10 @@ def project(p):
         b.append(icon_path(slug, cx + 10, 117, 18, P["cream"]))
         b.append(text("mono", label, cx + 35, 130.6, 13.5, P["cream"], tracking=1.2))
         cx += cw + 8
-    css = ""
+    pet = PROJECT_PETS.get(p["file"])
+    if pet:  # a little animal on the soil tile, facing the sprout
+        b.append(animal(pet[0], 150, 152, pet[1], True, d=int(p["num"]) * .7))
+    css = ANIMAL_CSS
     return svg_doc(W, H, "".join(b), defs, css, "%s - %s" % (p["name"], p["tagline"]))
 
 
@@ -390,9 +431,15 @@ def footer():
     for i in range(30):
         x = 14 + i * 33 + r.uniform(-8, 8)
         b.append(wheat(x, 212, h=r.uniform(46, 86), lean=r.uniform(-9, 9), delay=r.uniform(0, 4), dur=r.uniform(3.8, 5.6)))
+    # the whole herd lines up in front of the wheat
+    herd = [("cow", 142, 1.0, False), ("sheep", 272, .92, True), ("hen", 370, .96, False), ("hen-brown", 416, .9, True),
+            ("chick", 450, 1.0, False), ("pig", 548, .92, False), ("duck", 650, .96, True), ("dog", 758, .96, True),
+            ("sheep", 862, .92, False), ("rooster", 945, .72, True)]
+    for i, (kind, x, s, flip) in enumerate(herd):
+        b.append(animal(kind, x, 207, s, flip, d=i * .9))
     for i in range(22):
         b.append(tuft(r.uniform(0, 1000), 212, s=r.uniform(.8, 1.4), delay=r.uniform(0, 4)))
-    return svg_doc(1000, 210, "".join(b), defs, "", "Thanks for visiting the farm", rounded=18)
+    return svg_doc(1000, 210, "".join(b), defs, ANIMAL_CSS, "Thanks for visiting the farm", rounded=18)
 
 
 # ===================================================================== BADGES =
@@ -424,8 +471,8 @@ def main():
     print("building assets ->", OUT)
     write("hero", hero())
     write("growth", growth())
-    for num, title, sub, accent, icon, name in SECTIONS:
-        write(name, banner(num, title, sub, accent, icon))
+    for num, title, sub, accent, icon, name, pets in SECTIONS:
+        write(name, banner(num, title, sub, accent, icon, pets))
     for name, label, accent in TAGS:
         write(name, tag(label, accent))
     for p in PROJECTS:
