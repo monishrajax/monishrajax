@@ -1,7 +1,7 @@
 <!--
   FARM-THEMED PROFILE README
   ---------------------------------------------------------------------------
-  TODO before publishing (search this file for "TODO"):
+  Still to fill in (search this file for "TODO"; each spot shows a friendly "coming soon" note until then):
     - 01  NAME / EDUCATION / LOCATION rows in the dossier
     - 02  experience, leadership and education cards
     - 05  achievements        06  certifications
@@ -24,17 +24,21 @@
 
 <img src="assets/sec-01-dossier.svg" alt="01 - Farmer's Dossier" width="100%">
 
+<!--
+  TODO: add these rows to the table below (above SPECIALIZATION) once you have the details:
+  | `NAME` | Your full name |
+  | `EDUCATION` | University · degree · years |
+  | `LOCATION` | City, country |
+-->
+
 | | |
 |:--|:--|
 | `FARMER ID` | **monishrajax** &nbsp;·&nbsp; [github.com/monishrajax](https://github.com/monishrajax) |
-| `NAME` | *TODO: add your full name* |
-| `EDUCATION` | *TODO: add your university · degree · years* |
-| `LOCATION` | *TODO: add your city, country* |
 | `SPECIALIZATION` | Full-Stack Development & Applied AI |
 | `STATUS` | **PLANTING // GROWING // HARVESTING** |
 
 - Full-stack developer who ships products end to end: React and Next.js front ends, Express and Flask back ends, Postgres and Supabase underneath.
-- Live in production: **NORMALIZE** (a single-product storefront with Razorpay checkout), **VisaGuard** (an agentic-AI compliance platform demo) and **Don't Touch the Floor** (a multiplayer arcade game).
+- Shipped and online: **NORMALIZE** (a single-product storefront built with Razorpay checkout), **VisaGuard** (an agentic-AI compliance platform demo) and **Don't Touch the Floor** (a multiplayer arcade game).
 - Hands-on with applied AI: TF-IDF and cosine-similarity retrieval, in-browser OCR pipelines and agentic-AI product interfaces.
 - Comfortable with the delivery side too: Docker, Kubernetes and GitHub Actions CI/CD.
 - Philosophy: plant early, water daily (commit), harvest often (ship).
@@ -43,19 +47,14 @@
 
 <img src="assets/sec-02-experience.svg" alt="02 - Experience and Leadership" width="100%">
 
-<img src="assets/tag-professional.svg" height="32" alt="Professional">
-
-> 🌱 *TODO: add your roles here, newest first: **Role** · Company · dates, then 2-4 bullets of what you built or improved (numbers help).*
-
-<img src="assets/tag-leadership.svg" height="32" alt="Leadership">
-
-> 🌱 *TODO: add clubs, communities, events or teams you lead or organise.*
-
-<img src="assets/tag-education.svg" height="32" alt="Education">
-
-> 🌱 *TODO: add your school or university, degree, years and anything notable (coursework, CGPA, societies).*
+> 🌱 *Fresh soil: roles, leadership and education are being planted here. Check back soon.*
 
 <!--
+  TODO: replace the note above with your real cards. Use one tag image per group:
+    <img src="assets/tag-professional.svg" height="32" alt="Professional">   then your roles, newest first
+    <img src="assets/tag-leadership.svg" height="32" alt="Leadership">       clubs, communities, events, teams
+    <img src="assets/tag-education.svg" height="32" alt="Education">         school or university, degree, years
+
   EXAMPLE CARD - copy, paste and edit for each role:
 
   <table>
@@ -173,19 +172,20 @@
 
 <img src="assets/sec-05-achievements.svg" alt="05 - Achievements" width="100%">
 
-> 🏆 *TODO: add hackathons, awards, rankings, published work or anything you are proud of. One bullet each, newest first.*
+<!-- TODO: add hackathons, awards, rankings or published work: one bullet each, newest first. Then delete the note below. -->
+> 🏆 *The trophy shelf is being polished. Achievements land here soon.*
 
 <br>
 
 <img src="assets/sec-06-certifications.svg" alt="06 - Certifications" width="100%">
 
 <!--
-  TODO: replace the placeholder row with your certifications, for example:
+  TODO: add your certifications as a table and delete the note below, for example:
+  | | |
+  |:--|:--|
   | `Google` | Introduction to Generative AI |
 -->
-| | |
-|:--|:--|
-| `ISSUER` | *TODO: add your certifications, one row each* |
+> 🌾 *Certificates are still drying in the barn. Check back soon.*
 
 <br>
 
