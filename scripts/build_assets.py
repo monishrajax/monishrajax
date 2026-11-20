@@ -199,9 +199,9 @@ def hero():
     b.append('<g clip-path="url(#cm)"><g stroke="#0a3d1c" stroke-width="1.8" opacity=".9">%s</g>'
              '<g stroke="#2a8f48" stroke-width="1" opacity=".32">%s</g></g>' % (rows, rows2))
 
-    # pasture on the far hill: sheep and cows grazing
-    for kind, x, s, flip, d in [("sheep", 236, .46, False, .4), ("sheep", 268, .40, True, 1.9), ("sheep", 306, .44, False, 3.1),
-                                ("cow", 452, .50, False, .8), ("cow", 510, .44, True, 2.6), ("cow", 742, .46, True, 1.2)]:
+    # pasture on the far hill: a few sheep and cows grazing (kept sparse so the scene stays calm)
+    for kind, x, s, flip, d in [("sheep", 232, .46, False, .4), ("sheep", 280, .40, True, 1.9),
+                                ("cow", 470, .50, False, .8), ("cow", 562, .44, True, 2.6)]:
         b.append(animal(kind, x, y_at(mid, x) + 9, s, flip, d))
 
     # near field with crop rows
@@ -213,17 +213,12 @@ def hero():
     b.append('<g clip-path="url(#cn)"><g stroke="#0b4a20" stroke-width="3" opacity=".85">%s</g>'
              '<g stroke="#3fbd62" stroke-width="1.2" opacity=".4">%s</g></g>' % (nrows, nrows2))
 
-    # animals in the near field (the tractor drives past in front of them)
-    for kind, x, s, flip, d in [("sheep", 148, .68, False, .2), ("sheep", 196, .62, True, 2.2),
-                                ("cow", 376, .74, False, 1.4), ("pig", 612, .62, True, .9)]:
-        b.append(animal(kind, x, 386, s, flip, d))
-
-    # tractor (scaled), driving left -> right
+    # tractor (scaled), driving left -> right; the near field is left clear for it
     b.append('<g transform="translate(0 396) scale(.86)"><g class="drive">%s</g></g>' % ico_tractor())
 
     # fireflies
     ff = ""
-    for _ in range(18):
+    for _ in range(9):
         x, y = r.uniform(30, 970), r.uniform(205, 395)
         ff += ('<g class="ff" style="animation-delay:%ss;animation-duration:%ss"><circle cx="%s" cy="%s" r="7" fill="#d8ff7a" opacity=".16"/>'
                '<circle cx="%s" cy="%s" r="2" fill="#eaffa6"/></g>' % (f(-r.uniform(0, 7)), f(r.uniform(5, 9)), f(x), f(y), f(x), f(y)))
@@ -236,13 +231,11 @@ def hero():
         fence += '<path d="M%d 440V398L%d 391L%d 398V440Z" fill="url(#fence)"/>' % (px, px + 7, px + 14)
         fence += '<path d="M%d 440V398L%d 391" stroke="#d9a066" stroke-width="1" opacity=".5" fill="none"/>' % (px, px + 7)
     b.append(fence)
-    # barnyard in front of the fence, and a rooster crowing on a fence post
-    for kind, x, s, flip, d in [("dog", 62, .9, False, .3), ("hen", 236, .8, False, .1), ("hen-brown", 272, .74, True, 1.3),
-                                ("chick", 300, .8, False, .6), ("duck", 780, .82, True, .2), ("hen-black", 884, .76, False, 2.1)]:
-        b.append(animal(kind, x, 440, s, flip, d))
-    b.append(animal("rooster", 525, 392, .9, False, .5))
-    for i in range(34):
-        b.append(tuft(r.uniform(-6, 1004), 442, s=r.uniform(.8, 1.5), delay=r.uniform(0, 4), dur=r.uniform(3.4, 5.4)))
+    # a dog by the fence on the left, and a rooster crowing on the post by the barn
+    b.append(animal("dog", 64, 440, .9, False, .3))
+    b.append(animal("rooster", 861, 392, .9, False, .5))
+    for i in range(14):
+        b.append(tuft(r.uniform(-6, 1004), 442, s=r.uniform(.6, 1.0), delay=r.uniform(0, 4), dur=r.uniform(3.4, 5.4)))
 
     # hanging wooden sign (swings gently)
     size = fit_size("display", HANDLE, 90, 590)
