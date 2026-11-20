@@ -2,7 +2,6 @@
   FARM-THEMED PROFILE README
   ---------------------------------------------------------------------------
   Still to fill in (search this file for "TODO"):
-    - 05  more achievements (the portfolio lists several hackathon wins)
     - 06  the blockchain certification, once its details are ready
     - 08  an email link, if you want one shown
   Banners, tags, project cards, farm animals and the tech carousel are generated:
@@ -195,6 +194,11 @@ Remote programming internship, writing Java.
 |:--|:--|:--|
 | 🏆 **AR/VR Track Winners** | 24-Hour Hackathon<br>Android Club VITC, VIT Chennai · 2026 | Won the AR/VR track among 100+ teams with Team Powerhouse, building immersive VR animations with real-time interaction in 24 hours. |
 | 🎖️ **Top 50** | Visa Hackathon, Shaastra 2026<br>IIT Madras × Visa | Selected in the Top 50 of 1200+ teams, just short of the Top 10, with an agentic-AI system for continuous PCI/PII compliance. |
+| 🏆 **Track Winner** | Dataset 2.0 Hackathon<br>ECDS, VIT Chennai · 2025 | Won a track among 100 teams in 36 hours with a Smart Office Automation Agent: Meet summaries, action-item extraction, Teams automation and VR meeting replay. |
+| 🥇 **1st Place & Best Project** | GLYTCH 25, Software Track<br>VIT Chennai · 2025 | Team Win.exe took first place and Best Project among 80 teams with a healthcare software solution. |
+| 🎖️ **Top 15 & Special Mention** | Hackathrone · 2025 | Top 15 of 150+ teams, plus the Special Mention for Innovation and Novelty, for VeriTrust: AI and blockchain identity verification and credit scoring. |
+| 🥇 **1st Place** | YUVA AI-THON '25 (HealthTech)<br>VIT Chennai × YUVA VITCC · 2025 | Won the HealthTech domain among 100 finalists from 500+ teams with a VR physiotherapy system for rural rehabilitation. |
+| 🥇 **1st Place** | IAIC 2025 Hackathon<br>SpoRIC, L&T Technology Services, VIT Chennai · 2025 | First place in a 12-hour hackathon at the Industry-Academia Innovators Conclave, against 70 teams. |
 
 
 <br>
