@@ -24,16 +24,12 @@
 
 <img src="assets/sec-01-dossier.svg" alt="01 - Farmer's Dossier" width="100%">
 
-<!--
-  TODO: add these rows to the table below (above SPECIALIZATION) once you have the details:
-  | `NAME` | Your full name |
-  | `EDUCATION` | University · degree · years |
-  | `LOCATION` | City, country |
--->
-
 | | |
 |:--|:--|
 | `FARMER ID` | **monishrajax** &nbsp;·&nbsp; [github.com/monishrajax](https://github.com/monishrajax) |
+| `NAME` | Monish Raja V |
+| `EDUCATION` | Integrated M.Tech, Computer Science and Business · VIT Chennai · 2023 — 2028 |
+| `LOCATION` | Chennai, India |
 | `SPECIALIZATION` | Full-Stack Development & Applied AI |
 | `STATUS` | **PLANTING // GROWING // HARVESTING** |
 
