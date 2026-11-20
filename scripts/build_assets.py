@@ -54,6 +54,10 @@ TAGS = [  # file, label, accent
     ("tag-featured", "FEATURED FIELDS", "lime"),
     ("tag-barn", "THE BARN // ALL REPOSITORIES", "orange"),
     ("tag-stack", "ON THE FIELD", "gold"),
+    # date tags for the professional roles in section 02
+    ("tag-date-normalize", "JUL 2026 — PRESENT · FULL-TIME", "lime"),
+    ("tag-date-stitch", "JUN — JUL 2026 · INTERNSHIP", "gold"),
+    ("tag-date-codsoft", "NOV — DEC 2024 · REMOTE INTERNSHIP", "sky"),
 ]
 
 PROJECTS = [

@@ -47,29 +47,32 @@
 
 <img src="assets/sec-02-experience.svg" alt="02 - Experience and Leadership" width="100%">
 
-> 🌱 *Fresh soil: roles, leadership and education are being planted here. Check back soon.*
+<img src="assets/tag-professional.svg" height="32" alt="Professional">
 
-<!--
-  TODO: replace the note above with your real cards. Use one tag image per group:
-    <img src="assets/tag-professional.svg" height="32" alt="Professional">   then your roles, newest first
-    <img src="assets/tag-leadership.svg" height="32" alt="Leadership">       clubs, communities, events, teams
-    <img src="assets/tag-education.svg" height="32" alt="Education">         school or university, degree, years
+<table>
+<tr><td>
+<img src="assets/tag-date-normalize.svg" height="30" alt="July 2026 to present, full-time"><br>
+<b>Full Stack Developer</b> · <a href="https://www.normalize.world">Normalize</a><br>
+Core-team developer at a bags and apparel brand, owning product development from architecture to deployment.
+<ul>
+<li>Owns features end to end, from technical design to deployment and monitoring.</li>
+<li>Builds and integrates APIs and third-party services such as payments and logistics.</li>
+<li>Works directly with the founder on product direction and architecture.</li>
+</ul>
+</td></tr>
+<tr><td>
+<img src="assets/tag-date-stitch.svg" height="30" alt="June to July 2026, internship"><br>
+<b>Summer Intern</b> · Stitch<br>
+Worked with Go, Python and Java at a fintech platform used by banks and fintechs.
+</td></tr>
+<tr><td>
+<img src="assets/tag-date-codsoft.svg" height="30" alt="November to December 2024, remote internship"><br>
+<b>Programmer (Remote Intern)</b> · CodSoft, Chennai, India<br>
+Remote programming internship, writing Java.
+</td></tr>
+</table>
 
-  EXAMPLE CARD - copy, paste and edit for each role:
-
-  <table>
-  <tr><td>
-
-  <img src="assets/tag-professional.svg" height="30" alt="2026 - present">
-
-  **Role title** · Company
-
-  - What you built or shipped, and the result.
-  - Another concrete achievement.
-
-  </td></tr>
-  </table>
--->
+> 🌱 *Leadership and education are being planted next. Check back soon.*
 
 <br>
 
