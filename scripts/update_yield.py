@@ -296,18 +296,17 @@ def render_svg(data, today, stats):
             b.append('<g transform="translate(%s %s) scale(%s)"><use href="#g%d"/></g>' % (f(x), f(ly - cell / 2 + 1), "%.4f" % k, lv))
     b.append(text("mono", "MORE", lx + 5 * (cell + 4) + 6, ly + 4, 11, P["mist"], tracking=1.6))
 
-    # ---- farm strip (hills, wheat, a tractor tilling the yield)
+    # ---- farm strip (hills, a little wheat, a few animals; kept sparse on purpose)
     gh = catmull([(0, 372), (200, 362), (440, 370), (680, 360), (880, 368), (1000, 362)], 10)
     b.append('<g clip-path="url(#strip)"><path d="%s" fill="url(#gr)"/>' % hill_path(gh, 1000, 410))
     rows = "".join('<path d="M500 330L%d 410"/>' % xb for xb in range(-900, 1900, 70))
     b.append('<g stroke="#0b4a20" stroke-width="2.4" opacity=".7">%s</g>' % rows)
-    for i in range(26):
-        b.append(wheat(14 + i * 38 + r.uniform(-8, 8), 412, h=r.uniform(20, 34), lean=r.uniform(-5, 5), delay=r.uniform(0, 4), dur=r.uniform(3.8, 5.6)))
-    for kind, x, s, flip, dd in [("hen", 150, .52, False, .2), ("sheep", 372, .5, True, 1.1), ("cow", 566, .46, False, .6),
-                                 ("chick", 700, .72, False, .3), ("pig", 872, .46, True, .9)]:
+    for i in range(12):
+        b.append(wheat(30 + i * 84 + r.uniform(-10, 10), 412, h=r.uniform(20, 30), lean=r.uniform(-5, 5), delay=r.uniform(0, 4), dur=r.uniform(3.8, 5.6)))
+    for kind, x, s, flip, dd in [("sheep", 250, .5, True, 1.1), ("cow", 492, .46, False, .6), ("hen", 744, .52, False, .2)]:
         b.append(animal(kind, x, 406, s, flip, dd))
-    for i in range(18):
-        b.append(tuft(r.uniform(0, 1000), 412, s=r.uniform(.5, .9), delay=r.uniform(0, 4)))
+    for i in range(8):
+        b.append(tuft(r.uniform(0, 1000), 412, s=r.uniform(.5, .8), delay=r.uniform(0, 4)))
     b.append("</g>")
     defs.append('<clipPath id="strip"><path d="M1 340H999V391Q999 409 981 409H19Q1 409 1 391Z"/></clipPath>')
 

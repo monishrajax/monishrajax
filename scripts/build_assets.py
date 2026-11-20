@@ -280,7 +280,7 @@ def banner(num, title, sub, accent_key, icon_fn, pets=()):
     b.append(text("display", title, 226, 84, tsize, P["cream"]))
     # furrow line with sprouts
     b.append('<rect x="2" y="106" width="996" height="3" rx="1.5" fill="url(#acc)"/>')
-    for i, x in enumerate(range(236, 980, 96)):
+    for i, x in enumerate(range(260, 980, 150)):
         b.append(sprout(x, 106, 1.0 + (i % 3) * .12))
     # farm decoration
     b.append(wheat(846, 100, h=54, lean=5, delay=.3))
@@ -416,17 +416,16 @@ def footer():
     b.append('<path d="%s" fill="#14672f"/>' % hill_path(h2, 1000, 210))
     b.append(text("display", "THANKS FOR VISITING THE FARM", 500, 74, fit_size("display", "THANKS FOR VISITING THE FARM", 38, 800), P["cream"], anchor="middle"))
     b.append(text("mono", "BUILT WITH SOIL, SUN & A LOT OF COMMITS", 500, 104, 14, P["g4"], anchor="middle", tracking=3.2))
-    for i in range(30):
-        x = 14 + i * 33 + r.uniform(-8, 8)
-        b.append(wheat(x, 212, h=r.uniform(46, 86), lean=r.uniform(-9, 9), delay=r.uniform(0, 4), dur=r.uniform(3.8, 5.6)))
-    # the whole herd lines up in front of the wheat
-    herd = [("cow", 142, 1.0, False), ("sheep", 272, .92, True), ("hen", 370, .96, False), ("hen-brown", 416, .9, True),
-            ("chick", 450, 1.0, False), ("pig", 548, .92, False), ("duck", 650, .96, True), ("dog", 758, .96, True),
-            ("sheep", 862, .92, False), ("rooster", 945, .72, True)]
+    # a lighter field of wheat with a small herd standing in front of it (spaced out so nothing overlaps)
+    for i in range(16):
+        x = 22 + i * 62 + r.uniform(-10, 10)
+        b.append(wheat(x, 212, h=r.uniform(40, 68), lean=r.uniform(-8, 8), delay=r.uniform(0, 4), dur=r.uniform(3.8, 5.6)))
+    herd = [("cow", 300, 1.0, False), ("sheep", 438, .92, True), ("pig", 586, .92, False),
+            ("hen", 716, .96, True), ("chick", 756, 1.0, False), ("dog", 880, .96, True)]
     for i, (kind, x, s, flip) in enumerate(herd):
         b.append(animal(kind, x, 207, s, flip, d=i * .9))
-    for i in range(22):
-        b.append(tuft(r.uniform(0, 1000), 212, s=r.uniform(.8, 1.4), delay=r.uniform(0, 4)))
+    for i in range(10):
+        b.append(tuft(r.uniform(0, 1000), 212, s=r.uniform(.7, 1.1), delay=r.uniform(0, 4)))
     return svg_doc(1000, 210, "".join(b), defs, ANIMAL_CSS, "Thanks for visiting the farm", rounded=18)
 
 
