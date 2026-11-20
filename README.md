@@ -143,7 +143,7 @@
 <!-- REPOS:START -->
 | Repo | What's growing | Stack | Live | Updated |
 |:--|:--|:--|:--:|:--:|
-| [**normalize-website**](https://github.com/monishrajax/normalize-website) | Storefront for a single-product launch with Razorpay checkout | React · Express · Supabase | [open](https://www.normalize.world) | 2026‑11‑19 |
+| [**normalize-website**](https://github.com/monishrajax/normalize-website) | Storefront for a single-product launch with Razorpay checkout | React · Express · Supabase | [open](https://www.normalize.world) | 2026‑11‑20 |
 | [**Dont-touch-the-ground**](https://github.com/monishrajax/Dont-touch-the-ground) | Prison-break arcade platformer with multiplayer races | JavaScript · Canvas | [open](https://dont-touch-the-ground.vercel.app) | 2026‑10‑17 |
 | [**Smart-Resume-Job-Matching-Information-Retrieval-System**](https://github.com/monishrajax/Smart-Resume-Job-Matching-Information-Retrieval-System) | Ranks resumes against a job description (TF-IDF + cosine) | Flask · React · scikit-learn | — | 2026‑04‑06 |
 | [**microservices-ci-cd**](https://github.com/monishrajax/microservices-ci-cd) | Commit → build → Docker → Kubernetes delivery pipeline | GitHub Actions · Docker · K8s | — | 2026‑04‑06 |
