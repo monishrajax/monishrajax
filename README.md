@@ -83,7 +83,13 @@ Remote programming internship, writing Java.
 | `AUG 2025 — SEP 2026` | **Finance Member**<br>HackClub VIT Chennai | Part of the finance team, supporting the club's budgets and funds. |
 | `SEP 2024 — MAY 2026` | **Management**<br>Open Source Programming Club, VIT Chennai | Part of the management team behind VIT Chennai's open-source events and hackathons, including GLYTCH and VOID. |
 
-> 🌱 *Education is being planted next. Check back soon.*
+<img src="assets/tag-education.svg" height="32" alt="Education">
+
+| When | Programme | Where |
+|:--|:--|:--|
+| `2023 — 2028` | **Integrated M.Tech, Computer Science and Business** | **Vellore Institute of Technology**, Chennai, India<br>Studying here since 2023. Projects, hackathon wins and open-source work all took shape here. |
+| `2021 — 2023` | **Higher Secondary (Class XII)** | Velammal Higher Secondary School |
+| `UNTIL 2021` | **ICSE (Class X)** | St. Patrick's High School |
 
 <br>
 
