@@ -172,8 +172,10 @@
 
 <img src="assets/sec-05-achievements.svg" alt="05 - Achievements" width="100%">
 
-<!-- TODO: add hackathons, awards, rankings or published work: one bullet each, newest first. Then delete the note below. -->
-> 🏆 *The trophy shelf is being polished. Achievements land here soon.*
+<a href="https://github.com/monishrajax?achievement=pull-shark&tab=achievements"><img src="assets/achievement-pull-shark.svg" alt="Pull Shark: a GitHub achievement earned for opening pull requests that got merged" width="100%"></a>
+
+<!-- TODO: add more achievements (hackathons, awards, rankings, published work) as extra cards or bullets below the Pull Shark card. -->
+
 
 <br>
 

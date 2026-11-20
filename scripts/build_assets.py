@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from farmlib import (P, f, svg_doc, text, text_width, fit_size, cap_height, catmull, y_at, hill_path,  # noqa: E402
                      wheat, tuft, sprout, icon_path, rng, ico_barn, ico_sunflower, ico_sprout_big,
                      ico_wheat_bundle, ico_idcard, ico_pitchfork, ico_rosette, ico_scroll, ico_mailbox,
-                     ico_pots, ico_tractor, ico_wheelbarrow, windmill, ICONS)
+                     ico_pots, ico_tractor, ico_wheelbarrow, ico_shark, windmill, ICONS)
 from farm_animals import ANIMAL_CSS, animal  # noqa: E402
 
 ROOT =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,6 +75,12 @@ PROJECTS = [
     dict(file="project-06-cicd", num="06", name="MICROSERVICES CI/CD",
          tagline="COMMIT > BUILD > CONTAINER > CLUSTER", badge="SOURCE · 2026",
          stack=[("githubactions", "ACTIONS"), ("docker", "DOCKER"), ("kubernetes", "KUBERNETES"), ("nodedotjs", "NODE.JS")]),
+]
+
+# award cards for section 05 (original artwork; GitHub's own badge images are not reused)
+ACHIEVEMENTS = [
+    dict(file="achievement-pull-shark", title="PULL SHARK", tagline="OPENED PULL REQUESTS THAT GOT MERGED", badge="EARNED",
+         chips=[("github", "GITHUB ACHIEVEMENT"), (None, "MERGED PULL REQUESTS")]),
 ]
 
 # a small animal on each project's soil tile: file -> (kind, scale)
@@ -341,6 +347,44 @@ def project(p):
     return svg_doc(W, H, "".join(b), defs, css, "%s - %s" % (p["name"], p["tagline"]))
 
 
+# ============================================================ ACHIEVEMENT CARD =
+def achievement(a):
+    W, H = 1000, 156
+    defs = ('<linearGradient id="pnl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0f3320"/><stop offset="1" stop-color="#071a0e"/></linearGradient>'
+            '<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6a8c"/><stop offset="1" stop-color="#0a2c40"/></linearGradient>'
+            '<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd966"/><stop offset="1" stop-color="#d9962a"/></linearGradient>'
+            '<linearGradient id="shk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fa6c6"/><stop offset="1" stop-color="#4b7090"/></linearGradient>'
+            '<clipPath id="pool"><circle cx="90" cy="70" r="31"/></clipPath>')
+    css = ".wv{animation:wv 3.6s linear infinite}@keyframes wv{from{transform:translateX(0)}to{transform:translateX(-26px)}}"
+    b = ['<rect x="2" y="2" width="996" height="152" rx="16" fill="url(#pnl)" stroke="#1b5233" stroke-width="2"/>',
+         '<path d="M18 2H178V154H18Q2 154 2 138V18Q2 2 18 2Z" fill="url(#sea)"/>',
+         '<path d="M72 104L58 148L76 139L84 152L92 108Z" fill="#c0392b"/><path d="M108 104L122 148L104 139L96 152L88 108Z" fill="#8fe05a"/>']
+    b.append("".join('<circle cx="%s" cy="%s" r="6.2" fill="url(#gold)"/>' % (f(90 + math.cos(k * math.pi / 8) * 41), f(70 + math.sin(k * math.pi / 8) * 41)) for k in range(16)))
+    b.append('<circle cx="90" cy="70" r="40" fill="url(#gold)"/><circle cx="90" cy="70" r="35" fill="#fff3d6"/>')
+    waves = "".join('<path d="M%d %dq6.5 -6 13 0t13 0" fill="none" stroke="#bfe6f2" stroke-width="2" opacity="%s"/>' % (x, y, op)
+                    for y, op in ((88, .8), (98, .5)) for x in range(36, 170, 26))
+    b.append('<g clip-path="url(#pool)"><rect x="50" y="36" width="80" height="70" fill="#0f5b7c"/><g class="wv">%s</g>'
+             '<g class="bob"><g transform="translate(90 66) scale(.58)">%s</g></g></g>' % (waves, ico_shark()))
+    b.append('<path d="M63 53A31 31 0 0 1 82 40" stroke="#fff" stroke-width="3" opacity=".3" fill="none" stroke-linecap="round"/>')
+    # status pill, title, tagline, chips (same layout as the project cards)
+    pill_w = text_width("mono", a["badge"], 13, 2) + 52
+    px = W - 16 - pill_w
+    b.append('<rect x="%s" y="18" width="%s" height="28" rx="14" fill="#04110a" stroke="%s" stroke-width="1.6"/>' % (f(px), f(pill_w), P["gold"]))
+    b.append('<circle cx="%s" cy="32" r="5" fill="%s" class="pulse"/>' % (f(px + 17), P["gold"]))
+    b.append(text("mono", a["badge"], px + 31, 37, 13, P["cream"], tracking=2))
+    b.append(text("display", a["title"], 206, 72, fit_size("display", a["title"], 46, 590), P["cream"]))
+    b.append(text("mono", a["tagline"], 207, 100, 16, P["mist"], tracking=1.2))
+    cx = 206
+    for slug, label in a["chips"]:
+        cw = (10 + 18 + 7 if slug else 14) + text_width("mono", label, 13.5, 1.2) + 13
+        b.append('<rect x="%s" y="110" width="%s" height="32" rx="10" fill="#0f3320" stroke="#1f6f3a" stroke-width="1.4"/>' % (f(cx), f(cw)))
+        if slug:
+            b.append(icon_path(slug, cx + 10, 117, 18, P["cream"]))
+        b.append(text("mono", label, cx + (35 if slug else 14), 130.6, 13.5, P["cream"], tracking=1.2))
+        cx += cw + 8
+    return svg_doc(W, H, "".join(b), defs, css, "%s - %s" % (a["title"], a["tagline"]))
+
+
 # ============================================================= TECH CAROUSEL =
 def toolshed():
     W, H = 1000, 252
@@ -464,6 +508,8 @@ def main():
         write(name, tag(label, accent))
     for p in PROJECTS:
         write(p["file"], project(p))
+    for a in ACHIEVEMENTS:
+        write(a["file"], achievement(a))
     write("arsenal", toolshed())
     for name, label, accent, icon in BADGES:
         write(name, badge(label, accent, icon))

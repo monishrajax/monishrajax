@@ -410,6 +410,21 @@ def ico_wheelbarrow():
     )
 
 
+def ico_shark():
+    """Friendly cartoon shark facing right, centred on (0,0), about 100 wide (needs gradient id="shk")."""
+    return (
+        '<path d="M-36 0L-54 -18C-48 -8 -48 8 -54 20Z" fill="#46698a"/>'
+        '<path d="M-37 1C-31 -16 -8 -23 14 -19C31 -16 43 -7 48 2C40 11 25 19 4 19C-14 19 -31 13 -37 1Z" fill="url(#shk)"/>'
+        '<path d="M-31 7C-14 17 18 17 42 5C37 13 23 19 4 19C-14 19 -27 14 -31 7Z" fill="#e8f2f7"/>'
+        '<path d="M-4 -20L9 -40C11 -31 13 -25 15 -19Z" fill="#46698a"/>'
+        '<path d="M5 11L-8 27C3 25 14 21 21 13Z" fill="#46698a"/>'
+        '<path d="M14 -7q-2 6 0 11M19 -8q-2 7 0 12M24 -7q-2 6 0 11" stroke="#33546e" stroke-width="1.4" fill="none" stroke-linecap="round"/>'
+        '<circle cx="31" cy="-5" r="2.7" fill="#10202c"/><circle cx="31.9" cy="-6" r=".95" fill="#fff"/>'
+        '<path d="M31 6Q41 10 48 3" fill="none" stroke="#10202c" stroke-width="1.8" stroke-linecap="round"/>'
+        '<path d="M34 7.8l1.6-3.4l1.7 4M39.4 8.6l1.6-3.5l1.7 3.4M44 6.6l1.2-2.9l1.4 2.5" fill="#fff"/>'
+    )
+
+
 def windmill(x, y, wheel_dur=9):
     """Farm windmill with tower base at (x, y)."""
     blades = "".join(
