@@ -203,9 +203,9 @@
 
 <p align="center">
 <a href="https://github.com/monishrajax"><img src="assets/badge-github.svg" height="42" alt="GitHub"></a>
+<a href="https://www.linkedin.com/in/monish-raja-v-106539293/"><img src="assets/badge-linkedin.svg" height="42" alt="LinkedIn"></a>
 <!--
   TODO: uncomment these and add your own links
-  <a href="https://www.linkedin.com/in/YOUR-HANDLE"><img src="assets/badge-linkedin.svg" height="42" alt="LinkedIn"></a>
   <a href="https://YOUR-PORTFOLIO.example"><img src="assets/badge-portfolio.svg" height="42" alt="Portfolio"></a>
   <a href="mailto:you@example.com"><img src="assets/badge-email.svg" height="42" alt="Email"></a>
 -->
