@@ -72,7 +72,18 @@ Remote programming internship, writing Java.
 </td></tr>
 </table>
 
-> 🌱 *Leadership and education are being planted next. Check back soon.*
+<img src="assets/tag-leadership.svg" height="32" alt="Leadership">
+
+| When | Role | What |
+|:--|:--|:--|
+| `MAR 2026 — NOW` | **Vice President**<br>Computer Society of India (CSI) Student Chapter, VIT Chennai | Helps lead the chapter and its events. |
+| `DEC 2025 — NOW` | **Operations**<br>Artificial Intelligence Club, VIT Chennai | On the operations team, helping plan and run the club's activities. |
+| `OCT — NOV 2025` | **Committee Member**<br>TechnoVIT Chennai | Organizing committee for the VOID hackathon: ran the registration desk and judged the technical round. |
+| `SEP 2025 — NOW` | **Volunteer**<br>Rotaract Club of VIT, Chennai Campus | Volunteers on the club's community-service projects. |
+| `AUG 2025 — SEP 2026` | **Finance Member**<br>HackClub VIT Chennai | Part of the finance team, supporting the club's budgets and funds. |
+| `SEP 2024 — MAY 2026` | **Management**<br>Open Source Programming Club, VIT Chennai | Part of the management team behind VIT Chennai's open-source events and hackathons, including GLYTCH and VOID. |
+
+> 🌱 *Education is being planted next. Check back soon.*
 
 <br>
 
