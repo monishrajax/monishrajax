@@ -189,7 +189,12 @@ Remote programming internship, writing Java.
 
 <a href="https://github.com/monishrajax?achievement=pull-shark&tab=achievements"><img src="assets/achievement-pull-shark.svg" alt="Pull Shark: a GitHub achievement earned for opening pull requests that got merged" width="100%"></a>
 
-<!-- TODO: add more achievements (hackathons, awards, rankings, published work) as extra cards or bullets below the Pull Shark card. -->
+<img src="assets/tag-hackathons.svg" height="32" alt="Hackathon results">
+
+| Result | Event | What |
+|:--|:--|:--|
+| 🏆 **AR/VR Track Winners** | 24-Hour Hackathon<br>Android Club VITC, VIT Chennai · 2026 | Won the AR/VR track among 100+ teams with Team Powerhouse, building immersive VR animations with real-time interaction in 24 hours. |
+| 🎖️ **Top 50** | Visa Hackathon, Shaastra 2026<br>IIT Madras × Visa | Selected in the Top 50 of 1200+ teams, just short of the Top 10, with an agentic-AI system for continuous PCI/PII compliance. |
 
 
 <br>

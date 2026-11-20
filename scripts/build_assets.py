@@ -58,6 +58,7 @@ TAGS = [  # file, label, accent
     ("tag-date-normalize", "JUL 2026 — PRESENT · FULL-TIME", "lime"),
     ("tag-date-stitch", "JUN — JUL 2026 · INTERNSHIP", "gold"),
     ("tag-date-codsoft", "NOV — DEC 2024 · REMOTE INTERNSHIP", "sky"),
+    ("tag-hackathons", "HACKATHON RESULTS", "gold"),
 ]
 
 PROJECTS = [
