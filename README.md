@@ -1,11 +1,10 @@
 <!--
   FARM-THEMED PROFILE README
   ---------------------------------------------------------------------------
-  Still to fill in (search this file for "TODO"; each spot shows a friendly "coming soon" note until then):
-    - 01  NAME / EDUCATION / LOCATION rows in the dossier
-    - 02  experience, leadership and education cards
-    - 05  achievements        06  certifications
-    - 08  LinkedIn / portfolio / email links
+  Still to fill in (search this file for "TODO"):
+    - 05  more achievements (the portfolio lists several hackathon wins)
+    - 06  the blockchain certification, once its details are ready
+    - 08  an email link, if you want one shown
   Banners, tags, project cards, farm animals and the tech carousel are generated:
     python3 scripts/build_assets.py        (edit the CONFIG block at the top first)
   The crop-yield graph (assets/yield.svg) and the repo table below refresh by themselves:
@@ -220,9 +219,9 @@ Remote programming internship, writing Java.
 <p align="center">
 <a href="https://github.com/monishrajax"><img src="assets/badge-github.svg" height="42" alt="GitHub"></a>
 <a href="https://www.linkedin.com/in/monish-raja-v-106539293/"><img src="assets/badge-linkedin.svg" height="42" alt="LinkedIn"></a>
+<a href="https://monishportfolio-sigma.vercel.app"><img src="assets/badge-portfolio.svg" height="42" alt="Portfolio"></a>
 <!--
-  TODO: uncomment these and add your own links
-  <a href="https://YOUR-PORTFOLIO.example"><img src="assets/badge-portfolio.svg" height="42" alt="Portfolio"></a>
+  TODO: uncomment this and add your email once you want it shown
   <a href="mailto:you@example.com"><img src="assets/badge-email.svg" height="42" alt="Email"></a>
 -->
 </p>
