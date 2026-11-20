@@ -320,36 +320,93 @@ def ico_sun(rays=10):
 
 
 def ico_tractor():
-    """Tractor with its wheels' ground line at y=0, spanning x 0..170, facing right."""
-    def wheel(cx, cy, r, rim, dur):
-        spokes = "".join('<path d="M0 0L%s %s" stroke="#c98f1d" stroke-width="%s"/>' % (
-            f(math.cos(k * math.pi / 3) * rim), f(math.sin(k * math.pi / 3) * rim), f(max(1.6, r / 14))) for k in range(6))
-        return (
-            '<g transform="translate(%s %s)"><g class="spin" style="transform-origin:0px 0px;animation-duration:%ss">'
-            '<circle r="%s" fill="#111c14"/>'
-            '<circle r="%s" fill="none" stroke="#2b3a2f" stroke-width="%s" stroke-dasharray="%s %s"/>'
-            '<circle r="%s" fill="#f5c542"/><circle r="%s" fill="#e0a92a"/>%s<circle r="%s" fill="#5a4a1a"/>'
-            '</g></g>' % (f(cx), f(cy), f(dur), f(r), f(r - r * .09), f(r * .16), f(r * .17), f(r * .15),
-                          f(rim), f(rim * .62), spokes, f(rim * .24)))
-    puffs = "".join(
-        '<circle cx="125" cy="-92" r="5" fill="#cfe9d4" class="puff" style="animation-delay:%ss"/>' % f(-i * 0.9) for i in range(3))
+    """Realistic red tractor, side view, facing right. Ground line at y=0; spans x 0..175, about 130 tall."""
+    def tyre(cx, cy, r, rim, dur, lugs=0):
+        p = []
+        if lugs:  # drive tyre with chunky tread lugs
+            p.append('<circle r="%s" fill="#15171a"/>' % f(r - 5))
+            for k in range(lugs):
+                p.append('<path d="M-3.4 %sL3.4 %sL4.8 %sL-4.8 %sZ" transform="rotate(%s)" fill="#0a0b0d"/>' % (
+                    f(-(r - 6)), f(-(r - 6)), f(-(r + 1)), f(-(r + 1)), f(k * 360.0 / lugs)))
+            p.append('<circle r="%s" fill="none" stroke="#262a2f" stroke-width="2"/>' % f(r - 10))
+        else:     # front tyre with longitudinal ribs
+            p.append('<circle r="%s" fill="#15171a"/>' % f(r))
+            for rr in (r - 4, r - 8):
+                p.append('<circle r="%s" fill="none" stroke="#2a2e33" stroke-width="1.5"/>' % f(rr))
+        p.append('<circle r="%s" fill="#e8e2cf"/><circle r="%s" fill="#d6cfb6"/>' % (f(rim), f(rim - 2.6)))
+        n = 8 if lugs else 6
+        for k in range(n):
+            a = k * 2 * math.pi / n
+            p.append('<circle cx="%s" cy="%s" r="%s" fill="#8a8470"/>' % (
+                f(math.cos(a) * rim * .64), f(math.sin(a) * rim * .64), f(max(1.1, rim * .08))))
+        p.append('<circle r="%s" fill="#c4302b"/><circle r="%s" fill="#7e1d1a"/>' % (f(rim * .36), f(rim * .15)))
+        return ('<g transform="translate(%s %s)"><g class="spin" style="transform-origin:0px 0px;animation-duration:%ss">%s</g></g>'
+                % (f(cx), f(cy), f(dur), "".join(p)))
+
+    defs = (
+        '<defs>'
+        '<linearGradient id="trRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0524a"/><stop offset=".45" stop-color="#c4302b"/><stop offset="1" stop-color="#8f2420"/></linearGradient>'
+        '<linearGradient id="trGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4eef6"/><stop offset=".55" stop-color="#8cc3d6"/><stop offset="1" stop-color="#5e9fb8"/></linearGradient>'
+        '<linearGradient id="trRoof" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f1e2"/><stop offset="1" stop-color="#cfc8b2"/></linearGradient>'
+        '</defs>')
+    hitch = ('<path d="M36 -30L5 -24M40 -62L9 -50" stroke="#3b4046" stroke-width="4.5" stroke-linecap="round" fill="none"/>'
+             '<circle cx="5" cy="-24" r="3" fill="#5b6168"/><circle cx="9" cy="-50" r="2.6" fill="#5b6168"/>')
+    chassis = ('<rect x="30" y="-44" width="40" height="16" rx="7" fill="#3a3f45"/>'
+               '<rect x="60" y="-33" width="108" height="7" rx="3" fill="#2b2f34"/>')
+    cab = (
+        '<path d="M22 -44L26 -112Q26 -119 33 -119L85 -119Q91 -119 93 -112L99 -50L99 -44Z" fill="#b32a25"/>'
+        '<rect x="31" y="-110" width="58" height="60" fill="#1e2a2f"/>'
+        '<path d="M33 -52V-72Q33 -75 36 -75H44V-52Z" fill="#2d3338"/>'
+        '<rect x="39" y="-86" width="19" height="34" rx="8" fill="#3a6ea5"/>'
+        '<circle cx="50" cy="-96" r="7.6" fill="#f0c7a2"/>'
+        '<ellipse cx="50" cy="-101" rx="13" ry="3.3" fill="#e6cb86"/>'
+        '<path d="M41 -101Q50 -115 59 -101Z" fill="#f0d994"/><path d="M41.6 -102.4Q50 -105.4 58.4 -102.4" stroke="#b5483a" stroke-width="2.2" fill="none"/>'
+        '<path d="M62 -52L72 -74" stroke="#171a1d" stroke-width="3" stroke-linecap="round"/>'
+        '<ellipse cx="73" cy="-76" rx="2.8" ry="9" transform="rotate(24 73 -76)" fill="none" stroke="#171a1d" stroke-width="2.6"/>'
+        '<path d="M55 -80L72 -77" stroke="#3a6ea5" stroke-width="5.5" stroke-linecap="round"/>'
+        '<path d="M31 -52L34 -110H86L91 -52Z" fill="url(#trGlass)" opacity=".5"/>'
+        '<path d="M38 -110H54L44 -52H33Z" fill="#fff" opacity=".16"/><path d="M66 -110H72L66 -52H60Z" fill="#fff" opacity=".1"/>'
+        '<path d="M60 -110H64V-50H60Z" fill="#b32a25"/>'
+        '<path d="M86 -110L92 -50" stroke="#b32a25" stroke-width="5"/>'
+        '<rect x="15" y="-124" width="92" height="11" rx="4" fill="url(#trRoof)"/><rect x="15" y="-115" width="92" height="2.4" fill="#a9a28c" opacity=".7"/>'
+        '<g class="t-beacon"><ellipse cx="62" cy="-127" rx="5.5" ry="3.2" fill="#f5a623"/></g>'
+        '<path d="M92 -100L104 -97" stroke="#23272b" stroke-width="2.4"/><rect x="103" y="-105" width="4.5" height="12" rx="1.6" fill="#23272b"/>'
+        '<rect x="82" y="-68" width="5.5" height="2.2" rx="1" fill="#e4dec8"/><rect x="19" y="-62" width="3.4" height="7" rx="1.2" fill="#ff5a4d"/>')
+    hood = (
+        '<path d="M99 -62H148Q160 -62 163 -52L166 -34Q166 -30 162 -30H99Z" fill="url(#trRed)"/>'
+        '<path d="M101 -60H148Q157 -60 160 -53" fill="none" stroke="#ee7b72" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>'
+        '<path d="M106 -52H124M106 -47H124M106 -42H124" stroke="#85201c" stroke-width="1.6" stroke-linecap="round"/>'
+        '<rect x="134" y="-52" width="15" height="5.5" rx="1.6" fill="#dcdcdc"/>'
+        '<rect x="159" y="-59" width="7" height="27" rx="1.8" fill="#2b2f34"/><path d="M161 -56V-35M164 -56V-35" stroke="#6b7178" stroke-width="1"/>'
+        '<circle cx="163" cy="-55" r="9" fill="#fff5c4" opacity=".22"/><circle cx="162.5" cy="-55" r="4" fill="#fff5c4" stroke="#8b9096" stroke-width="1.2"/>'
+        '<rect x="131" y="-93" width="5.6" height="32" fill="#3a3f45"/><path d="M127.4 -95H140.2L138 -92H129.6Z" fill="#4a5056"/>'
+        '<rect x="164" y="-43" width="9" height="13" rx="2.5" fill="#2b2f34"/>')
+    front = (tyre(160, -21, 21, 11.5, 2.3)
+             + '<path d="M140 -21C140 -58 180 -58 180 -21" fill="none" stroke="#b32a25" stroke-width="3.6" stroke-linecap="round"/>')
+    rear = (tyre(56, -34, 35, 18.5, 3.9, lugs=18)
+            + '<path d="M16 -34C16 -94 96 -94 96 -34L88 -34C88 -88 24 -88 24 -34Z" fill="#c4302b"/>'
+            + '<path d="M16 -34C16 -94 96 -94 96 -34" fill="none" stroke="#ee7b72" stroke-width="1.5" opacity=".7" transform="translate(0 -.8)"/>')
+    smoke = "".join('<circle cx="133.8" cy="-99" r="4.6" fill="#d8ece0" class="puff" style="animation-delay:%ss"/>' % f(-i * .9) for i in range(3))
     return (
-        '<style>.puff{animation:puff 2.7s ease-out infinite}'
-        '@keyframes puff{0%{transform:translate(0,0) scale(.4);opacity:.75}100%{transform:translate(-30px,-50px) scale(1.7);opacity:0}}</style>'
-        + puffs +
-        '<rect x="122" y="-86" width="6" height="26" fill="#3b3b3b"/><rect x="118.5" y="-90" width="13" height="5" rx="2" fill="#555"/>'
-        '<rect x="78" y="-31" width="66" height="6" fill="#1f6f2e"/>'
-        + wheel(142, -20, 20, 11, 2.2) +
-        '<path d="M78 -62H140Q148 -62 150 -54L152 -34H78Z" fill="#2e9b3e"/>'
-        '<rect x="84" y="-58" width="58" height="5" fill="#5fd06f" opacity=".5"/>'
-        '<path d="M146 -57V-38M149 -56V-38" stroke="#14541f" stroke-width="1.6"/>'
-        '<rect x="78" y="-36" width="76" height="9" fill="#1f7a2f"/>'
-        '<path d="M26 -52V-96H80V-52" fill="#bfe9c6" fill-opacity=".38" stroke="#1f7a2f" stroke-width="4" stroke-linejoin="round"/>'
-        '<rect x="38" y="-70" width="16" height="18" rx="3" fill="#14541f"/>'
-        '<rect x="20" y="-103" width="68" height="8" rx="3" fill="#2e9b3e"/>'
-        '<rect x="18" y="-54" width="64" height="10" fill="#1f7a2f"/>'
-        + wheel(44, -34, 34, 19, 3.6) +
-        '<path d="M4 -34A40 40 0 0 1 84 -34" fill="none" stroke="#1f7a2f" stroke-width="7" stroke-linecap="round"/>'
+        '<style>.puff{transform-box:fill-box;transform-origin:center;animation:puff 2.7s ease-out infinite}'
+        '@keyframes puff{0%{transform:translate(0,0) scale(.4);opacity:.7}100%{transform:translate(-30px,-46px) scale(1.7);opacity:0}}'
+        '.t-vib{animation:t-vib .34s ease-in-out infinite alternate}@keyframes t-vib{from{transform:translateY(0)}to{transform:translateY(-.9px)}}'
+        '.t-beacon{animation:t-beacon 1.1s steps(1) infinite}@keyframes t-beacon{0%{opacity:1}50%{opacity:.25}}</style>'
+        + defs + '<g class="t-vib">' + hitch + chassis + cab + hood + front + rear + smoke + '</g>')
+
+
+def ico_wheelbarrow():
+    """Wheelbarrow full of produce (banner icon for the experience section)."""
+    return (
+        '<path d="M-6 12L-10 27M12 12L16 27" stroke="#6b4423" stroke-width="3.2" stroke-linecap="round"/>'
+        '<path d="M14 -2L36 -12M14 6L36 -4" stroke="#8a5a2e" stroke-width="3.4" stroke-linecap="round"/>'
+        '<path d="M-28 -6H22L13 14H-19Z" fill="#c0392b"/><path d="M-28 -6H22" stroke="#8e2a20" stroke-width="3.4" stroke-linecap="round"/>'
+        '<path d="M-20 1H17" stroke="#8e2a20" stroke-width="1.6" opacity=".6"/>'
+        '<circle cx="-15" cy="-11" r="7" fill="#e5483b"/><circle cx="-3" cy="-14" r="7.6" fill="#f0a732"/><circle cx="10" cy="-11" r="7" fill="#e5483b"/>'
+        '<path d="M-15 -18Q-13 -23 -9 -22M-3 -21Q-1 -26 3 -25M10 -18Q12 -23 16 -22" stroke="#4cc35a" stroke-width="2" fill="none" stroke-linecap="round"/>'
+        '<path d="M-33 14L-26 4" stroke="#6b4423" stroke-width="2.6" stroke-linecap="round"/>'
+        '<circle cx="-33" cy="14" r="9.5" fill="#23272b"/><circle cx="-33" cy="14" r="4.6" fill="#d8d2bd"/>'
+        '<path d="M-33 8.4V19.6M-38.6 14H-27.4" stroke="#8a8470" stroke-width="1.2"/>'
     )
 
 

@@ -27,7 +27,7 @@ TAGLINE = "FULL-STACK  ·  APPLIED AI  ·  CLOUD"
 
 def ico_tractor_small():
     """Tractor scaled and centred for use as a banner icon."""
-    return '<g transform="scale(.4) translate(-83 52)">%s</g>' % ico_tractor()
+    return '<g transform="scale(.36) translate(-88 63)">%s</g>' % ico_tractor()
 
 
 # number, title, subtitle, accent, icon fn, file, animals perched on top of the sign: (kind, x, scale, mirrored)
@@ -224,7 +224,7 @@ def hero():
         b.append(animal(kind, x, 386, s, flip, d))
 
     # tractor (scaled), driving left -> right
-    b.append('<g transform="translate(0 395) scale(.96)"><g class="drive">%s</g></g>' % ico_tractor())
+    b.append('<g transform="translate(0 396) scale(.86)"><g class="drive">%s</g></g>' % ico_tractor())
 
     # fireflies
     ff = ""
