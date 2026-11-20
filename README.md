@@ -182,12 +182,12 @@
 <img src="assets/sec-06-certifications.svg" alt="06 - Certifications" width="100%">
 
 <!--
-  TODO: add your certifications as a table and delete the note below, for example:
+  TODO: when the blockchain certificate is ready, replace the note below with a table row, for example:
   | | |
   |:--|:--|
-  | `Google` | Introduction to Generative AI |
+  | `ISSUER` | Name of the blockchain certification |
 -->
-> 🌾 *Certificates are still drying in the barn. Check back soon.*
+> ⛓️ *A blockchain certification is on its way. Uploading soon.*
 
 <br>
 
