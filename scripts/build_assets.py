@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from farmlib import (P, f, svg_doc, text, text_width, fit_size, cap_height, catmull, y_at, hill_path,  # noqa: E402
                      wheat, tuft, sprout, icon_path, rng, ico_barn, ico_sunflower, ico_sprout_big,
                      ico_wheat_bundle, ico_idcard, ico_pitchfork, ico_rosette, ico_scroll, ico_mailbox,
-                     ico_pots, ico_tractor, windmill, ICONS)
+                     ico_pots, ico_tractor, ico_wheelbarrow, windmill, ICONS)
 from farm_animals import ANIMAL_CSS, animal  # noqa: E402
 
 ROOT =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,16 +25,11 @@ OUT = os.path.join(ROOT, "assets")
 HANDLE = "MONISHRAJAX"
 TAGLINE = "FULL-STACK  ·  APPLIED AI  ·  CLOUD"
 
-def ico_tractor_small():
-    """Tractor scaled and centred for use as a banner icon."""
-    return '<g transform="scale(.36) translate(-88 63)">%s</g>' % ico_tractor()
-
-
 # number, title, subtitle, accent, icon fn, file, animals perched on top of the sign: (kind, x, scale, mirrored)
 SECTIONS = [
     ("01", "FARMER'S DOSSIER", "WHO RUNS THIS FARM", "lime", ico_idcard, "sec-01-dossier",
      [("rooster", 660, .5, False)]),
-    ("02", "EXPERIENCE & LEADERSHIP", "FIELD WORK // TRACTOR LOG", "gold", ico_tractor_small, "sec-02-experience",
+    ("02", "EXPERIENCE & LEADERSHIP", "FIELD WORK // THE WORK LOG", "gold", ico_wheelbarrow, "sec-02-experience",
      [("cow", 640, .46, False)]),
     ("03", "PROJECTS", "THE FIELDS // WHAT'S GROWING", "lime", ico_pots, "sec-03-projects",
      [("hen", 600, .62, False), ("chick", 640, .9, True)]),

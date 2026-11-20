@@ -23,7 +23,7 @@ import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from farmlib import (P, f, svg_doc, text, text_width, cap_height, wheat, tuft, ico_wheat_bundle,  # noqa: E402
-                     ico_sprout_big, ico_sunflower, ico_barn, ico_tractor, catmull, hill_path, rng)
+                     ico_sprout_big, ico_sunflower, ico_barn, catmull, hill_path, rng)
 from farm_animals import ANIMAL_CSS, animal  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -226,8 +226,7 @@ def render_svg(data, today, stats):
     for lv, art in GRASS.items():
         defs.append('<g id="g%d">%s</g>' % (lv, art))
     css = (".sw{animation:swy 3.8s ease-in-out infinite;transform-origin:8px 14px}"
-           "@keyframes swy{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}"
-           ".drv{animation:drv 24s linear infinite}@keyframes drv{from{transform:translateX(-90px)}to{transform:translateX(1040px)}}") + ANIMAL_CSS
+           "@keyframes swy{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}") + ANIMAL_CSS
 
     b = ['<rect x="1" y="1" width="998" height="408" rx="18" fill="url(#pn)" stroke="#1b5233" stroke-width="2"/>']
 
@@ -302,7 +301,6 @@ def render_svg(data, today, stats):
     b.append('<g clip-path="url(#strip)"><path d="%s" fill="url(#gr)"/>' % hill_path(gh, 1000, 410))
     rows = "".join('<path d="M500 330L%d 410"/>' % xb for xb in range(-900, 1900, 70))
     b.append('<g stroke="#0b4a20" stroke-width="2.4" opacity=".7">%s</g>' % rows)
-    b.append('<g transform="translate(0 404) scale(.36)"><g class="drv">%s</g></g>' % ico_tractor())
     for i in range(26):
         b.append(wheat(14 + i * 38 + r.uniform(-8, 8), 412, h=r.uniform(20, 34), lean=r.uniform(-5, 5), delay=r.uniform(0, 4), dur=r.uniform(3.8, 5.6)))
     for kind, x, s, flip, dd in [("hen", 150, .52, False, .2), ("sheep", 372, .5, True, 1.1), ("cow", 566, .46, False, .6),
