@@ -2,7 +2,6 @@
   FARM-THEMED PROFILE README
   ---------------------------------------------------------------------------
   Still to fill in (search this file for "TODO"):
-    - 06  the blockchain certification, once its details are ready
     - 08  an email link, if you want one shown
   Banners, tags, project cards, farm animals and the tech carousel are generated:
     python3 scripts/build_assets.py        (edit the CONFIG block at the top first)
@@ -205,13 +204,9 @@ Remote programming internship, writing Java.
 
 <img src="assets/sec-06-certifications.svg" alt="06 - Certifications" width="100%">
 
-<!--
-  TODO: when the blockchain certificate is ready, replace the note below with a table row, for example:
-  | | |
-  |:--|:--|
-  | `ISSUER` | Name of the blockchain certification |
--->
-> ⛓️ *A blockchain certification is on its way. Uploading soon.*
+<a href="certificates/simplilearn-blockchain-developer-training.pdf"><img src="assets/cert-blockchain.svg" alt="Blockchain Developer Training: certificate of completion from Simplilearn SkillUP, issued 20 October 2026, certificate code 10916987" width="100%"></a>
+
+<!-- TODO: add further certifications as more cards (see CERTIFICATES in scripts/build_assets.py) and keep their PDFs in certificates/. -->
 
 <br>
 

@@ -88,6 +88,12 @@ ACHIEVEMENTS = [
          chips=[("github", "GITHUB ACHIEVEMENT"), (None, "MERGED PULL REQUESTS")]),
 ]
 
+# certificate cards for section 06 (the README links each card to its PDF in certificates/)
+CERTIFICATES = [
+    dict(file="cert-blockchain", title="BLOCKCHAIN DEVELOPER TRAINING", tagline="CERTIFICATE OF COMPLETION // SIMPLILEARN SKILLUP",
+         badge="COMPLETED", chips=["ISSUED BY SIMPLILEARN", "20 OCT 2026", "CODE 10916987"]),
+]
+
 # a small animal on each project's soil tile: file -> (kind, scale)
 PROJECT_PETS = {
     "project-01-normalize": ("chick", .95),
@@ -390,6 +396,33 @@ def achievement(a):
     return svg_doc(W, H, "".join(b), defs, css, "%s - %s" % (a["title"], a["tagline"]))
 
 
+# ============================================================ CERTIFICATE CARD =
+def certificate(c):
+    W, H = 1000, 156
+    defs = ('<linearGradient id="pnl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0f3320"/><stop offset="1" stop-color="#071a0e"/></linearGradient>'
+            '<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b6a8e"/><stop offset="1" stop-color="#0c3249"/></linearGradient>')
+    b = ['<rect x="2" y="2" width="996" height="152" rx="16" fill="url(#pnl)" stroke="#1b5233" stroke-width="2"/>',
+         '<path d="M18 2H178V154H18Q2 154 2 138V18Q2 2 18 2Z" fill="url(#sky)"/>']
+    for x, y, s, d in ((34, 34, 1.0, 0), (146, 44, .8, 1.1), (142, 122, .9, 2.2), (38, 124, .7, .6)):  # twinkling sparkles
+        b.append('<path transform="translate(%d %d) scale(%s)" class="tw" style="animation-delay:%ss" '
+                 'd="M0 -6L1.6 -1.6L6 0L1.6 1.6L0 6L-1.6 1.6L-6 0L-1.6 -1.6Z" fill="#fff3d6"/>' % (x, y, s, f(-d)))
+    b.append('<g transform="translate(90 80) scale(2.1)"><g class="bob">%s</g></g>' % ico_scroll())
+    pill_w = text_width("mono", c["badge"], 13, 2) + 52
+    px = W - 16 - pill_w
+    b.append('<rect x="%s" y="18" width="%s" height="28" rx="14" fill="#04110a" stroke="%s" stroke-width="1.6"/>' % (f(px), f(pill_w), P["g4"]))
+    b.append('<circle cx="%s" cy="32" r="5" fill="%s" class="pulse"/>' % (f(px + 17), P["g4"]))
+    b.append(text("mono", c["badge"], px + 31, 37, 13, P["cream"], tracking=2))
+    b.append(text("display", c["title"], 206, 72, fit_size("display", c["title"], 44, 590), P["cream"]))
+    b.append(text("mono", c["tagline"], 207, 100, 16, P["mist"], tracking=1.2))
+    cx = 206
+    for label in c["chips"]:
+        cw = 14 + text_width("mono", label, 13.5, 1.2) + 13
+        b.append('<rect x="%s" y="110" width="%s" height="32" rx="10" fill="#0f3320" stroke="#1f6f3a" stroke-width="1.4"/>' % (f(cx), f(cw)))
+        b.append(text("mono", label, cx + 14, 130.6, 13.5, P["cream"], tracking=1.2))
+        cx += cw + 8
+    return svg_doc(W, H, "".join(b), defs, "", "%s - %s" % (c["title"], c["tagline"]))
+
+
 # ============================================================= TECH CAROUSEL =
 def toolshed():
     W, H = 1000, 252
@@ -515,6 +548,8 @@ def main():
         write(p["file"], project(p))
     for a in ACHIEVEMENTS:
         write(a["file"], achievement(a))
+    for c in CERTIFICATES:
+        write(c["file"], certificate(c))
     write("arsenal", toolshed())
     for name, label, accent, icon in BADGES:
         write(name, badge(label, accent, icon))
