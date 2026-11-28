@@ -359,24 +359,50 @@ def project(p):
 
 
 # ============================================================ ACHIEVEMENT CARD =
-def achievement(a):
-    W, H = 1000, 156
-    defs = ('<linearGradient id="pnl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0f3320"/><stop offset="1" stop-color="#071a0e"/></linearGradient>'
-            '<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6a8c"/><stop offset="1" stop-color="#0a2c40"/></linearGradient>'
-            '<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd966"/><stop offset="1" stop-color="#d9962a"/></linearGradient>'
-            '<linearGradient id="shk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fa6c6"/><stop offset="1" stop-color="#4b7090"/></linearGradient>'
-            '<clipPath id="pool"><circle cx="90" cy="70" r="31"/></clipPath>')
+_PANEL_DEF = ('<linearGradient id="pnl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0f3320"/>'
+              '<stop offset="1" stop-color="#071a0e"/></linearGradient>')
+_GOLD_DEF = ('<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd966"/>'
+             '<stop offset="1" stop-color="#d9962a"/></linearGradient>')
+_POOL_DEF = '<clipPath id="pool"><circle cx="90" cy="70" r="31"/></clipPath>'
+
+
+def _medal(tile_fill, scene, extra=""):
+    """Left tile of an award card: coloured tile, two ribbon tails, a gold scalloped medallion and its glass glint.
+    `scene` is drawn inside the medallion (clipped to url(#pool)); `extra` sits on the tile around the medallion."""
+    dots = "".join('<circle cx="%s" cy="%s" r="6.2" fill="url(#gold)"/>' % (f(90 + math.cos(k * math.pi / 8) * 41), f(70 + math.sin(k * math.pi / 8) * 41)) for k in range(16))
+    return ('<path d="M18 2H178V154H18Q2 154 2 138V18Q2 2 18 2Z" fill="%s"/>' % tile_fill
+            + '<path d="M72 104L58 148L76 139L84 152L92 108Z" fill="#c0392b"/><path d="M108 104L122 148L104 139L96 152L88 108Z" fill="#8fe05a"/>'
+            + dots
+            + '<circle cx="90" cy="70" r="40" fill="url(#gold)"/><circle cx="90" cy="70" r="35" fill="#fff3d6"/>'
+            + extra
+            + '<g clip-path="url(#pool)">%s</g>' % scene
+            + '<path d="M63 53A31 31 0 0 1 82 40" stroke="#fff" stroke-width="3" opacity=".3" fill="none" stroke-linecap="round"/>')
+
+
+def _art_shark():
+    """Pull Shark: a friendly shark cruising through rippling water."""
+    defs = ('<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6a8c"/><stop offset="1" stop-color="#0a2c40"/></linearGradient>'
+            + _GOLD_DEF
+            + '<linearGradient id="shk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fa6c6"/><stop offset="1" stop-color="#4b7090"/></linearGradient>'
+            + _POOL_DEF)
     css = ".wv{animation:wv 3.6s linear infinite}@keyframes wv{from{transform:translateX(0)}to{transform:translateX(-26px)}}"
-    b = ['<rect x="2" y="2" width="996" height="152" rx="16" fill="url(#pnl)" stroke="#1b5233" stroke-width="2"/>',
-         '<path d="M18 2H178V154H18Q2 154 2 138V18Q2 2 18 2Z" fill="url(#sea)"/>',
-         '<path d="M72 104L58 148L76 139L84 152L92 108Z" fill="#c0392b"/><path d="M108 104L122 148L104 139L96 152L88 108Z" fill="#8fe05a"/>']
-    b.append("".join('<circle cx="%s" cy="%s" r="6.2" fill="url(#gold)"/>' % (f(90 + math.cos(k * math.pi / 8) * 41), f(70 + math.sin(k * math.pi / 8) * 41)) for k in range(16)))
-    b.append('<circle cx="90" cy="70" r="40" fill="url(#gold)"/><circle cx="90" cy="70" r="35" fill="#fff3d6"/>')
     waves = "".join('<path d="M%d %dq6.5 -6 13 0t13 0" fill="none" stroke="#bfe6f2" stroke-width="2" opacity="%s"/>' % (x, y, op)
                     for y, op in ((88, .8), (98, .5)) for x in range(36, 170, 26))
-    b.append('<g clip-path="url(#pool)"><rect x="50" y="36" width="80" height="70" fill="#0f5b7c"/><g class="wv">%s</g>'
-             '<g class="bob"><g transform="translate(90 66) scale(.58)">%s</g></g></g>' % (waves, ico_shark()))
-    b.append('<path d="M63 53A31 31 0 0 1 82 40" stroke="#fff" stroke-width="3" opacity=".3" fill="none" stroke-linecap="round"/>')
+    scene = ('<rect x="50" y="36" width="80" height="70" fill="#0f5b7c"/><g class="wv">%s</g>'
+             '<g class="bob"><g transform="translate(90 66) scale(.58)">%s</g></g>' % (waves, ico_shark()))
+    return dict(defs=defs, css=css, tile="url(#sea)", scene=scene)
+
+
+ACHIEVEMENT_ART = {"shark": _art_shark}  # medallion scene per card; pick one with art="..." in ACHIEVEMENTS
+
+
+def achievement(a):
+    W, H = 1000, 156
+    art = ACHIEVEMENT_ART[a.get("art", "shark")]()
+    defs = _PANEL_DEF + art["defs"]
+    css = art["css"]
+    b = ['<rect x="2" y="2" width="996" height="152" rx="16" fill="url(#pnl)" stroke="#1b5233" stroke-width="2"/>',
+         _medal(art["tile"], art["scene"], art.get("extra", ""))]
     # status pill, title, tagline, chips (same layout as the project cards)
     pill_w = text_width("mono", a["badge"], 13, 2) + 52
     px = W - 16 - pill_w
