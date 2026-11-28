@@ -187,6 +187,8 @@ Remote programming internship, writing Java.
 
 <a href="https://github.com/monishrajax?achievement=pull-shark&tab=achievements"><img src="assets/achievement-pull-shark.svg" alt="Pull Shark: a GitHub achievement earned for opening pull requests that got merged" width="100%"></a>
 
+<a href="https://github.com/monishrajax?achievement=pair-extraordinaire&tab=achievements"><img src="assets/achievement-pair-extraordinaire.svg" alt="Pair Extraordinaire: a GitHub achievement earned for co-authoring commits on merged pull requests" width="100%"></a>
+
 <img src="assets/tag-hackathons.svg" height="32" alt="Hackathon results">
 
 | Result | Event | What |
