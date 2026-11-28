@@ -83,9 +83,12 @@ PROJECTS = [
 ]
 
 # award cards for section 05 (original artwork; GitHub's own badge images are not reused)
+# art: which medallion scene to draw, see ACHIEVEMENT_ART ("shark" | "pair")
 ACHIEVEMENTS = [
-    dict(file="achievement-pull-shark", title="PULL SHARK", tagline="OPENED PULL REQUESTS THAT GOT MERGED", badge="EARNED",
+    dict(file="achievement-pull-shark", art="shark", title="PULL SHARK", tagline="OPENED PULL REQUESTS THAT GOT MERGED", badge="EARNED",
          chips=[("github", "GITHUB ACHIEVEMENT"), (None, "MERGED PULL REQUESTS")]),
+    dict(file="achievement-pair-extraordinaire", art="pair", title="PAIR EXTRAORDINAIRE", tagline="CO-AUTHORED COMMITS ON MERGED PULL REQUESTS", badge="EARNED",
+         chips=[("github", "GITHUB ACHIEVEMENT"), (None, "CO-AUTHORED COMMITS")]),
 ]
 
 # certificate cards for section 06 (the README links each card to its PDF in certificates/)
@@ -393,7 +396,32 @@ def _art_shark():
     return dict(defs=defs, css=css, tile="url(#sea)", scene=scene)
 
 
-ACHIEVEMENT_ART = {"shark": _art_shark}  # medallion scene per card; pick one with art="..." in ACHIEVEMENTS
+def _art_pair():
+    """Pair Extraordinaire: two chicks beak to beak under a beating heart, hopping in turn."""
+    defs = ('<linearGradient id="mdw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3aa859"/><stop offset="1" stop-color="#134f2c"/></linearGradient>'
+            + _GOLD_DEF
+            + '<linearGradient id="sk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fc9ea"/><stop offset="1" stop-color="#e4f6dc"/></linearGradient>'
+            + _POOL_DEF)
+    css = (ANIMAL_CSS + ".beat{transform-box:fill-box;transform-origin:center;animation:beat 1.8s ease-in-out infinite}"
+           "@keyframes beat{0%,100%{transform:scale(1)}45%{transform:scale(1.2)}}")
+    sparkles = "".join(  # twinkling sparkles in the corners of the tile
+        '<path transform="translate(%d %d) scale(%s)" class="tw" style="animation-delay:%ss" '
+        'd="M0 -6L1.6 -1.6L6 0L1.6 1.6L0 6L-1.6 1.6L-6 0L-1.6 -1.6Z" fill="#fff3d6"/>' % (x, y, s, f(-d))
+        for x, y, s, d in ((32, 34, 1.0, 0), (148, 30, .8, 1.1), (30, 118, .8, 2.2), (150, 116, .9, .6)))
+    heart = ('<g transform="translate(90 53) scale(1.15)"><g class="beat">'
+             '<path d="M0 6C-8 0 -10 -6 -5.5 -8.2C-2.6 -9.6 0 -7.4 0 -5C0 -7.4 2.6 -9.6 5.5 -8.2C10 -6 8 0 0 6Z" fill="#ff6a5c"/>'
+             '<path d="M-5.6 -6.6C-7 -5.6 -7.4 -4 -6.8 -2.6" stroke="#ffd2cb" stroke-width="1.2" fill="none" stroke-linecap="round"/>'
+             '</g></g>')
+    scene = ('<rect x="50" y="36" width="80" height="70" fill="url(#sk2)"/>'
+             '<path d="M50 84C68 76 84 82 96 84C108 86 120 78 134 80V108H50Z" fill="#4cc35a"/>'
+             '<path d="M50 92C70 87 88 90 100 91C114 92 124 88 134 90V108H50Z" fill="#2e9b4a"/>'
+             + animal("chick", 73, 91, 1.2, False, d=0)
+             + animal("chick", 107, 91, 1.2, True, d=.75)
+             + heart)
+    return dict(defs=defs, css=css, tile="url(#mdw)", scene=scene, extra=sparkles)
+
+
+ACHIEVEMENT_ART = {"shark": _art_shark, "pair": _art_pair}  # medallion scene per card; pick one with art="..." in ACHIEVEMENTS
 
 
 def achievement(a):
